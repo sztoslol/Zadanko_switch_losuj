@@ -30,7 +30,7 @@ class MainActivity : AppCompatActivity() {
             for (i in buttons.indices)
                 if (buttons[i].isChecked)
                     liczby.add(buttons[i].text.toString().toInt())
-            val ans = bubbleSort(liczby.toIntArray())
+            val ans = bubbleSort(liczby)
             var textans = ""
             for (k in ans) textans += "$k "
             findViewById<TextView>(R.id.textView_wynik).text = textans
@@ -38,7 +38,7 @@ class MainActivity : AppCompatActivity() {
     }
 }
 
-fun bubbleSort(arr:IntArray):IntArray{
+fun bubbleSort(arr:ArrayList<Int>):ArrayList<Int>{
     var swap = true
     while(swap){
         swap = false
@@ -54,7 +54,7 @@ fun bubbleSort(arr:IntArray):IntArray{
     return arr
 }
 
-private fun losuj() : List<Int> {
+fun losuj() : List<Int> {
     val kolejnosc = generateSequence {
         Random.nextInt(1..9)
     }.distinct().take(9).toList()

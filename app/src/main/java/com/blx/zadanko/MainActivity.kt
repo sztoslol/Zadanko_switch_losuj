@@ -24,7 +24,34 @@ class MainActivity : AppCompatActivity() {
             for (i in buttons.indices)
                 buttons[i].text = kolejnosc[i].toString()
         }
+
+        findViewById<Button>(R.id.button_sortuj).setOnClickListener {
+            var liczby = arrayListOf<Int>()
+            for (i in buttons.indices)
+                if (buttons[i].isChecked)
+                    liczby.add(buttons[i].text.toString().toInt())
+            val ans = bubbleSort(liczby.toIntArray())
+            var textans = ""
+            for (k in ans) textans += "$k "
+            findViewById<TextView>(R.id.textView_wynik).text = textans
+        }
     }
+}
+
+fun bubbleSort(arr:IntArray):IntArray{
+    var swap = true
+    while(swap){
+        swap = false
+        for(i in 0 until arr.size-1){
+            if(arr[i] > arr[i+1]){
+                val temp = arr[i]
+                arr[i] = arr[i+1]
+                arr[i + 1] = temp
+                swap = true
+            }
+        }
+    }
+    return arr
 }
 
 private fun losuj() : List<Int> {
